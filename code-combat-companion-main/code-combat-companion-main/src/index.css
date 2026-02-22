@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+@layer base {
+  :root {
+    --background: 30 15% 12%;
+    --foreground: 40 30% 90%;
+
+    --card: 30 12% 16%;
+    --card-foreground: 40 30% 90%;
+
+    --popover: 30 12% 16%;
+    --popover-foreground: 40 30% 90%;
+
+    --primary: 36 60% 50%;
+    --primary-foreground: 30 15% 10%;
+
+    --secondary: 30 10% 22%;
+    --secondary-foreground: 40 25% 85%;
+
+    --muted: 30 8% 20%;
+    --muted-foreground: 30 10% 55%;
+
+    --accent: 36 70% 55%;
+    --accent-foreground: 30 15% 10%;
+
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 30 10% 25%;
+    --input: 30 10% 25%;
+    --ring: 36 60% 50%;
+
+    --radius: 0.75rem;
+
+    /* Chess-specific tokens */
+    --square-light: 37 40% 75%;
+    --square-dark: 25 35% 38%;
+    --square-selected: 50 80% 55%;
+    --square-valid: 120 50% 45%;
+    --square-capture: 0 70% 50%;
+    --square-last-move: 45 60% 60%;
+    --piece-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    --piece-light: 43 90% 95%;
+    --piece-dark: 220 10% 15%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .chess-square-light {
+    background-color: hsl(var(--square-light));
+  }
+  .chess-square-dark {
+    background-color: hsl(var(--square-dark));
+  }
+  .chess-square-selected {
+    background-color: hsl(var(--square-selected) / 0.7);
+  }
+  .chess-square-valid {
+    position: relative;
+  }
+  .chess-square-valid::after {
+    content: '';
+    position: absolute;
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    background-color: hsl(var(--square-valid) / 0.5);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .chess-square-capture {
+    position: relative;
+  }
+  .chess-square-capture::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    border: 4px solid hsl(var(--square-capture) / 0.6);
+  }
+  .chess-square-last-move {
+    background-color: hsl(var(--square-last-move) / 0.4);
+  }
+  .chess-piece {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+    cursor: pointer;
+    transition: transform 0.1s ease;
+    user-select: none;
+  }
+  .chess-piece:hover {
+    transform: scale(1.08);
+  }
+  .chess-piece-light {
+    color: hsl(var(--piece-light));
+  }
+  .chess-piece-dark {
+    color: hsl(var(--piece-dark));
+  }
+}
